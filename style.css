@@ -53,3 +53,25 @@ body {
 .front-face {
   transform: rotateY(180deg);
 }
+
+#win {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 90px;
+  background-color: #98e695;
+  border: solid grey;
+}
+
+#reset {
+  position: relative;
+  bottom: 30px;
+  width: 60%;
+  height: 60px;
+  background-color: rgb(56, 56, 56);
+  color: snow;
+  border: solid rgb(179, 179, 179);
+}
