@@ -1,4 +1,7 @@
 const cards = document.querySelectorAll(".memory-card");
+let matches = 0; // Track the number of matches
+const totalMatches = cards.length / 2; // Total pairs in the game
+const GameReset = document.querySelector("#reset");
 
 let hasFlippedCard = false;
 let lockBoard = false;
@@ -29,6 +32,12 @@ function checkForMatch() {
 function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
+  matches++; // Increment the number of matches
+
+  if (matches === totalMatches) {
+    console.log("All items matched, Game Over!");
+    document.getElementById("win").style.display = "block";
+  }
 
   resetBoard();
 }
@@ -41,7 +50,7 @@ function unflipCards() {
     secondCard.classList.remove("flip");
 
     resetBoard();
-  }, 1500);
+  }, 1000);
 }
 
 function resetBoard() {
@@ -55,5 +64,21 @@ function resetBoard() {
     card.style.order = randomPos;
   });
 })();
+
+function gameEnd() {
+  console.log("Game Reset");
+  lockBoard = false;
+  matches = 0;
+  document.getElementById("win").style.display = "none";
+  cards.forEach((card) => {
+    card.classList.remove("flip");
+  });
+  cards.forEach((card) => card.addEventListener("click", flipCard));
+
+  cards.forEach((card) => {
+    let randomPos = Math.floor(Math.random() * 12);
+    card.style.order = randomPos;
+  });
+}
 
 cards.forEach((card) => card.addEventListener("click", flipCard));
